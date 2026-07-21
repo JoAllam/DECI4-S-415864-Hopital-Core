@@ -6,6 +6,7 @@ dotenv.config();
 const connectDB = require("../src/config/db");
 
 const Patient = require("../src/models/Patient");
+const MedicalRecord = require("../src/models/MedicalRecord");
 
 const patients = [
   {
@@ -51,8 +52,38 @@ async function seedDatabase() {
     await connectDB();
 
     await Patient.deleteMany();
+    await MedicalRecord.deleteMany();
 
-    await Patient.insertMany(patients);
+    const insertedPatients = await Patient.insertMany(patients);
+
+    const medicalRecords = [
+      {
+        patientId: insertedPatients[0]._id,
+        diagnosis: "Type 2 Diabetes",
+        medication: "Metformin",
+        labResult: "HbA1c: 7.2%",
+        notes: "Routine follow-up required.",
+        doctor: "Dr. Mahmoud",
+      },
+      {
+        patientId: insertedPatients[1]._id,
+        diagnosis: "Asthma",
+        medication: "Ventolin Inhaler",
+        labResult: "Spirometry: Mild obstruction",
+        notes: "Avoid dust exposure.",
+        doctor: "Dr. Salma",
+      },
+      {
+        patientId: insertedPatients[2]._id,
+        diagnosis: "Hypertension",
+        medication: "Amlodipine",
+        labResult: "BP: 150/95",
+        notes: "Reduce salt intake.",
+        doctor: "Dr. Ahmed",
+      },
+    ];
+
+    await MedicalRecord.insertMany(medicalRecords);
 
     console.log("Database seeded successfully.");
 
