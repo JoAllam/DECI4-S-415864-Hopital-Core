@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: hospital-backend
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: hospital-backend
+
+  template:
+    metadata:
+      labels:
+        app: hospital-backend
+
+    spec:
+      containers:
+        - name: backend
+          image: deci4-s-415864-hopital-core-backend:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 5000
+
+          env:
+            - name: MONGO_URI
+              value: mongodb://mongo:27017/hospital

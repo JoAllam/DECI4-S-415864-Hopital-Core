@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: hospital-frontend
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: hospital-frontend
+
+  template:
+    metadata:
+      labels:
+        app: hospital-frontend
+
+    spec:
+      containers:
+        - name: frontend
+          image: deci4-s-415864-hopital-core-frontend:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 3000
