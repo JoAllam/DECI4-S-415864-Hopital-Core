@@ -7,8 +7,6 @@ const connectDB = require("../../src/config/db");
 
 require("dotenv").config();
 
-console.log("MONGO_URI =", process.env.MONGO_URI);
-
 beforeAll(async () => {
   await connectDB();
 });
