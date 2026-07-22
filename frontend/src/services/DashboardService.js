@@ -16,9 +16,7 @@ export const getDashboardStats = async () => {
       (patient) => patient.status === "Active"
     ).length,
 
-    todaysAppointments: appointments.filter(
-      (appointment) => appointment.date === today
-    ).length,
+    todaysAppointments: appointments.length,
 
     pendingRecords: 0,
   };
