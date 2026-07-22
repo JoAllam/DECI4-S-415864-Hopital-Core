@@ -7,8 +7,6 @@ export const getDashboardStats = async () => {
     getAppointments(),
   ]);
 
-  const today = new Date().toISOString().split("T")[0];
-
   return {
     totalPatients: patients.length,
 
